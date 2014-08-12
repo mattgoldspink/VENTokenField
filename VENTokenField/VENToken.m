@@ -28,7 +28,14 @@
 @property (strong, nonatomic) IBOutlet UIView *backgroundView;
 @end
 
+static NSLineBreakMode _lineBreakMode = NSLineBreakByTruncatingTail;
+
 @implementation VENToken
+
++ (void)setLineBreakMode:(NSLineBreakMode)lineBreakMode
+{
+    _lineBreakMode = lineBreakMode;
+}
 
 - (id)initWithFrame:(CGRect)frame
 {
@@ -44,6 +51,7 @@
     self.backgroundView.layer.cornerRadius = 5;
     self.tapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(didTapToken:)];
     self.titleLabel.textColor = self.tintColor;
+    self.titleLabel.lineBreakMode = _lineBreakMode;
     [self addGestureRecognizer:self.tapGestureRecognizer];
 }
 
