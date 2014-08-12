@@ -77,7 +77,7 @@
 
 @property (copy, nonatomic) NSString *placeholderText;
 
-- (void)setColorScheme:(UIColor *)color;
+- (void)setColorScheme:(UIColor *)color DEPRECATED_ATTRIBUTE;
 
 @end
 
