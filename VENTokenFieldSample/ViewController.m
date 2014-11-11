@@ -81,7 +81,7 @@
 
 - (NSString *)tokenFieldCollapsedText:(VENTokenField *)tokenField
 {
-    return [NSString stringWithFormat:@"%lu people", [self.names count]];
+    return [NSString stringWithFormat:@"%tu people", [self.names count]];
 }
 
 #pragma mark - VENTokenSuggestionDataSource
