@@ -25,8 +25,11 @@
 @class VENTokenField;
 @protocol VENTokenFieldDelegate <NSObject>
 @optional
-- (void)tokenField:(VENTokenField *)tokenField didEnterText:(NSString *)text;
-- (void)tokenField:(VENTokenField *)tokenField didSelectSuggestion:(NSString *)suggestion forPartialText:(NSString *)text atIndex:(NSInteger) index;
+- (void)tokenField:(VENTokenField *)tokenField didEnterValue:(NSObject *)value;
+- (NSObject *)tokenField:(VENTokenField *)tokenField
+     didSelectSuggestion:(UITableViewCell *)suggestion
+          forPartialText:(NSString *)text
+                 atIndex:(NSInteger)index;
 - (void)tokenField:(VENTokenField *)tokenField didDeleteTokenAtIndex:(NSUInteger)index;
 - (void)tokenField:(VENTokenField *)tokenField didChangeText:(NSString *)text;
 - (void)tokenFieldDidBeginEditing:(VENTokenField *)tokenField;
@@ -43,41 +46,40 @@
 @optional
 - (BOOL)tokenFieldShouldPresentSuggestions:(VENTokenField *)tokenField;
 - (NSInteger)tokenField:(VENTokenField *)tokenField numberOfSuggestionsForPartialText:(NSString *)text;
-- (NSString *)tokenField:(VENTokenField *)tokenField suggestionTitleForPartialText:(NSString *)text atIndex:(NSInteger)index;
+- (UITableViewCell *)tokenField:(VENTokenField *)tokenField suggestionCellForPartialText:(NSString *)text atIndex:(NSInteger)index;
+- (CGFloat)tokenField:(VENTokenField *)tokenField heightForCellAtIndex:(NSInteger)index;
 @end
-
 
 @interface VENTokenField : UIView
 
-@property (weak, nonatomic) id<VENTokenFieldDelegate> delegate;
-@property (weak, nonatomic) id<VENTokenFieldDataSource> dataSource;
-@property (weak, nonatomic) id<VENTokenSuggestionDataSource> suggestionDataSource;
+@property(weak, nonatomic) id<VENTokenFieldDelegate> delegate;
+@property(weak, nonatomic) id<VENTokenFieldDataSource> dataSource;
+@property(weak, nonatomic) id<VENTokenSuggestionDataSource> suggestionDataSource;
 
 - (void)reloadData;
 - (void)collapse;
 - (NSString *)inputText;
-
 
 /**-----------------------------------------------------------------------------
  * @name Customization
  * -----------------------------------------------------------------------------
  */
 
-@property (assign, nonatomic) CGFloat maxHeight;
-@property (assign, nonatomic) CGFloat verticalInset;
-@property (assign, nonatomic) CGFloat horizontalInset;
-@property (assign, nonatomic) CGFloat tokenPadding;
-@property (assign, nonatomic) CGFloat minInputWidth;
+@property(assign, nonatomic) CGFloat maxHeight;
+@property(assign, nonatomic) CGFloat verticalInset;
+@property(assign, nonatomic) CGFloat horizontalInset;
+@property(assign, nonatomic) CGFloat tokenPadding;
+@property(assign, nonatomic) CGFloat minInputWidth;
 
-@property (assign, nonatomic) UIKeyboardType inputTextFieldKeyboardType;
-@property (strong, nonatomic) UIColor *toLabelTextColor;
-@property (strong, nonatomic) UIColor *inputTextFieldTextColor;
+@property(assign, nonatomic) UIKeyboardType inputTextFieldKeyboardType;
+@property(strong, nonatomic) UIColor *toLabelTextColor;
+@property(strong, nonatomic) UIColor *inputTextFieldTextColor;
 
-@property (strong, nonatomic) UILabel *toLabel;
+@property(strong, nonatomic) UILabel *toLabel;
+@property(strong, nonatomic) UITableView *tableView;
 
-@property (copy, nonatomic) NSString *placeholderText;
+@property(copy, nonatomic) NSString *placeholderText;
 
 - (void)setColorScheme:(UIColor *)color;
 
 @end
-
