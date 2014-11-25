@@ -7,20 +7,24 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "VENTokenField.h"
 
 @class VENTokenField;
 @protocol VENTokenSuggestionDataSource;
 
 @protocol VENSuggestionTableViewManagerDelegate <NSObject>
-- (void)suggestionManagerDidSelectValue:(NSString *)value atIndex:(NSInteger)index;
+
+- (void)suggestionManagerDidSelectCell:(UITableViewCell *)cell atIndex:(NSInteger)index;
+- (CGFloat)heightForCellAtIndex:(NSInteger)index;
+
 @end
 
-@interface VENSuggestionTableViewManager : NSObject < UITableViewDataSource, UITableViewDelegate, UIScrollViewDelegate >
+@interface VENSuggestionTableViewManager : NSObject <UITableViewDataSource, UITableViewDelegate, UIScrollViewDelegate>
 
-@property (strong, nonatomic) UITableView *tableView;
-@property (strong, nonatomic) VENTokenField *tokenField;
-@property (assign, nonatomic) id<VENTokenSuggestionDataSource> dataSource;
-@property (assign, nonatomic) id<VENSuggestionTableViewManagerDelegate> delegate;
+@property(strong, nonatomic) UITableView *tableView;
+@property(strong, nonatomic) VENTokenField *tokenField;
+@property(assign, nonatomic) id<VENTokenSuggestionDataSource> dataSource;
+@property(assign, nonatomic) id<VENSuggestionTableViewManagerDelegate> delegate;
 
 - (instancetype)initWithTokenField:(VENTokenField *)tokenField;
 
